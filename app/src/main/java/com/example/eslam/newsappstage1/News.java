@@ -7,8 +7,6 @@ package com.example.eslam.newsappstage1;
 public class News {
     private String title, section, date, url;
 
-
-
     public News(String title, String section, String date, String url) {
         this.title = title;
         this.section = section;
