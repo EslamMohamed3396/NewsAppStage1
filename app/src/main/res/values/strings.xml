@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">News App, Stage 1</string>
+    <string name="Internet">No, Internet Connection</string>
+    <string name="No_News">No News Available</string>
+</resources>
