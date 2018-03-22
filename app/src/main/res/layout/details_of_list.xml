@@ -18,7 +18,14 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_8">
 
-
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/padding_8"
+            android:textColor="@color/colorInformation"
+            android:textSize="@dimen/text_size" />
 
         <TextView
             android:id="@+id/section"
@@ -28,7 +35,6 @@
             android:padding="@dimen/padding_8"
             android:textColor="@color/colorInformation"
             android:textSize="@dimen/text_size" />
-
         <TextView
             android:id="@+id/date"
             android:layout_width="0dp"
@@ -37,5 +43,6 @@
             android:padding="@dimen/padding_8"
             android:textColor="@color/colorInformation"
             android:textSize="@dimen/text_size" />
+
     </LinearLayout>
 </LinearLayout>

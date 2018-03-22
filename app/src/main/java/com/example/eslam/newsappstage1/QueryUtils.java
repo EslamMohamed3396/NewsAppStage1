@@ -25,6 +25,7 @@ import java.util.List;
 public final class QueryUtils {
 
     private static String LOG_TAG = QueryUtils.class.getSimpleName();
+    private static final String RESPONSE = "response";
 
     private QueryUtils() {
     }
@@ -66,7 +67,7 @@ public final class QueryUtils {
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);
             urlConnection.connect();
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == urlConnection.HTTP_OK) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = ReadFromStream(inputStream);
             }
@@ -89,19 +90,28 @@ public final class QueryUtils {
             return null;
         }
         List<News> newsList = new ArrayList<>();
-
         try {
             JSONObject root = new JSONObject(Stringjson);
-            JSONObject response = root.getJSONObject("response");
+            JSONObject response = root.getJSONObject(RESPONSE);
             JSONArray result = response.getJSONArray("results");
             for (int i = 0; i < result.length(); i++) {
                 JSONObject currentNews = result.getJSONObject(i);
-
                 String title = currentNews.getString("webTitle");
                 String section = currentNews.getString("sectionName");
                 String url = currentNews.getString("webUrl");
                 String date = currentNews.getString("webPublicationDate");
-                newsList.add(new News(title, section, date, url));
+                JSONArray tags = currentNews.getJSONArray("tags");
+                if (tags.length() > 0) {
+                    for (int k = 0; k < tags.length(); k++) {
+                        JSONObject currentAuthor = tags.getJSONObject(k);
+                        String author = currentAuthor.getString("webTitle");
+                        newsList.add(new News(title, author, section, date, url));
+                        break;
+                    }
+
+                } else {
+                    newsList.add(new News(title, section, date, url));
+                }
             }
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error In Method extractFeatureFromJson : ", e);

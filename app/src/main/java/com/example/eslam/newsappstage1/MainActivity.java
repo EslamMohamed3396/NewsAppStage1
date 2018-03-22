@@ -21,7 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
     private ListView newslistView;
     private NewsAdapter adapter;
-    private static final String GUARDIAN_API = "http://content.guardianapis.com/search?q=debates&api-key=test";
+    private static final String GUARDIAN_API = "http://content.guardianapis.com/search?q=debates&api-key=test&show-tags=contributor";
     private static final int NEWS_LOADER_ID = 1;
     private TextView text_state;
     private ConnectivityManager connectivityManager;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 News news = adapter.getItem(position);
-                Uri newsuri = Uri.parse(news.getUrl());
+                Uri newsuri = Uri.parse(news.getmUrl());
                 Intent intent = new Intent(Intent.ACTION_VIEW, newsuri);
                 startActivity(intent);
             }

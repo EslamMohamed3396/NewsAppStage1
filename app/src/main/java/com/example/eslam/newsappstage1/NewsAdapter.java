@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 
 public class NewsAdapter extends ArrayAdapter<News> {
+
     public NewsAdapter(Context context, ArrayList<News> newsobjects) {
         super(context, 0, newsobjects);
     }
@@ -26,14 +27,21 @@ public class NewsAdapter extends ArrayAdapter<News> {
         if (rootview == null) {
             rootview = LayoutInflater.from(getContext()).inflate(R.layout.details_of_list, parent, false);
         }
+
         TextView Title = (TextView) rootview.findViewById(R.id.title);
-        Title.setText(currentnews.getTitle());
-       /* TextView Author=(TextView) rootview.findViewById(R.id.author);
-        Author.setText(currentnews.getAuthor());*/
+        Title.setText(currentnews.getmTitle());
+
+        TextView firstAuthorView = (TextView) rootview.findViewById(R.id.author);
+        if (currentnews.HasAuthor()) {
+            firstAuthorView.setText(currentnews.getmAutor());
+        } else {
+            firstAuthorView.setVisibility(View.GONE);
+
+        }
         TextView Section = (TextView) rootview.findViewById(R.id.section);
-        Section.setText(currentnews.getSection());
+        Section.setText(currentnews.getmSection());
         TextView Date = (TextView) rootview.findViewById(R.id.date);
-        Date.setText(currentnews.getDate());
+        Date.setText(currentnews.getmDate());
         return rootview;
     }
 }

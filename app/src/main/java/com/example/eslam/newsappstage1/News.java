@@ -5,30 +5,47 @@ package com.example.eslam.newsappstage1;
  */
 
 public class News {
-    private String title, section, date, url;
+    private String mTitle, mSection, mDate, mUrl;
+    private String mAuthor = HAS_AUTHOR;
+    private static String HAS_AUTHOR = "No Author";
 
-    public News(String title, String section, String date, String url) {
-        this.title = title;
-        this.section = section;
-        this.date = date;
-        this.url = url;
+
+    public News(String mTitle, String mAuthor, String mSection, String mDate, String mUrl) {
+        this.mTitle = mTitle;
+        this.mAuthor = mAuthor;
+        this.mSection = mSection;
+        this.mDate = mDate;
+        this.mUrl = mUrl;
     }
 
-    public String getTitle() {
-        return title;
+    public News(String mTitle, String mSection, String mDate, String mUrl) {
+        this.mTitle = mTitle;
+        this.mSection = mSection;
+        this.mDate = mDate;
+        this.mUrl = mUrl;
     }
 
-
-    public String getSection() {
-        return section;
+    public String getmTitle() {
+        return mTitle;
     }
 
-    public String getDate() {
-        return date;
+    public String getmAutor() {
+        return mAuthor;
     }
 
-    public String getUrl() {
-        return url;
+    public String getmSection() {
+        return mSection;
     }
 
+    public String getmDate() {
+        return mDate;
+    }
+
+    public String getmUrl() {
+        return mUrl;
+    }
+
+    public boolean HasAuthor() {
+        return mTitle != HAS_AUTHOR;
+    }
 }
