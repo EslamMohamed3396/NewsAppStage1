@@ -4,11 +4,15 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
     private ListView newslistView;
     private NewsAdapter adapter;
-    private static final String GUARDIAN_API = "http://content.guardianapis.com/search?q=debates&api-key=test&show-tags=contributor";
+    private static final String GUARDIAN_API = "http://content.guardianapis.com/search?";
     private static final int NEWS_LOADER_ID = 1;
     private TextView text_state;
     private ConnectivityManager connectivityManager;
@@ -69,7 +73,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(this, GUARDIAN_API);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String chooseBy = sharedPreferences.getString(getString(R.string.chooseBy_Key),
+                getString(R.string.chooseBy_defult_value));
+
+        Uri baseuri = Uri.parse(GUARDIAN_API);
+        Uri.Builder builder = baseuri.buildUpon();
+        builder.appendQueryParameter("q", "debates");
+        builder.appendQueryParameter("api-key", "test");
+        builder.appendQueryParameter("show-tags", "contributor");
+        builder.appendQueryParameter("tag", chooseBy);
+        return new NewsLoader(this, builder.toString());
     }
 
     @Override
@@ -86,5 +101,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
         adapter.clear();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.actionSetting) {
+            Intent GoToSettingActivity = new Intent(this, SettingActivity.class);
+            startActivity(GoToSettingActivity);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

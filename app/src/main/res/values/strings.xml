@@ -2,4 +2,19 @@
     <string name="app_name">News App, Stage 1</string>
     <string name="Internet">No, Internet Connection</string>
     <string name="No_News">No News Available</string>
+
+
+    <string name="titleOfMenu">Settings</string>
+    <string name="titleOfSetting">News Setting</string>
+
+    <string name="chooseBy">Choose By</string>
+    <string name="chooseBy_Key" translatable="false">choose_by</string>
+    <string name="chooseBy_defult_value" translatable="false">@string/politics_value</string>
+
+    <string name="sport_lable">Sport</string>
+    <string name="sport_value" translatable="false">sport/sport</string>
+
+    <string name="politics_lable">Politics</string>
+    <string name="politics_value" translatable="false">politics/politics</string>
+
 </resources>

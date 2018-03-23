@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="choose_Section_by_lable">
+        <item>@string/sport_lable</item>
+        <item>@string/politics_lable</item>
+    </string-array>
+    <string-array name="choose_Section_by_values">
+        <item>@string/sport_value</item>
+        <item>@string/politics_value</item>
+    </string-array>
+
+</resources>

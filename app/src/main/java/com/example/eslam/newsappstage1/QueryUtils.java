@@ -1,5 +1,6 @@
 package com.example.eslam.newsappstage1;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -26,6 +27,8 @@ public final class QueryUtils {
 
     private static String LOG_TAG = QueryUtils.class.getSimpleName();
     private static final String RESPONSE = "response";
+    private static final int READTIMEOUT = 10000;
+    private static final int CONNECTTIMEOUT = 15000;
 
     private QueryUtils() {
     }
@@ -64,8 +67,8 @@ public final class QueryUtils {
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
-            urlConnection.setReadTimeout(10000);
-            urlConnection.setConnectTimeout(15000);
+            urlConnection.setReadTimeout(READTIMEOUT);
+            urlConnection.setConnectTimeout(CONNECTTIMEOUT);
             urlConnection.connect();
             if (urlConnection.getResponseCode() == urlConnection.HTTP_OK) {
                 inputStream = urlConnection.getInputStream();
@@ -89,6 +92,7 @@ public final class QueryUtils {
         if (TextUtils.isEmpty(Stringjson)) {
             return null;
         }
+        Context c = null;
         List<News> newsList = new ArrayList<>();
         try {
             JSONObject root = new JSONObject(Stringjson);
