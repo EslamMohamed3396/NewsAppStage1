@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private TextView text_state;
     private ConnectivityManager connectivityManager;
     private View progressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
